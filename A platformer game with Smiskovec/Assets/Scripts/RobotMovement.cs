@@ -68,15 +68,18 @@ public class RobotMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(-4.314114f, 4.314114f, 1); // Flip the sprite to face left 
             isWalking = true;
+            
         }
         else if (movement.x > 0) // If moving right
         {
             transform.localScale = new Vector3(4.314114f, 4.314114f, 1); // Reset the sprite to face right
             isWalking = true;
+            
         }
         else
         {
             isWalking = false;
+            
         }
 
         // Set animator parameters
@@ -111,6 +114,19 @@ public class RobotMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Dash();
+        }
+        //Handle Animations
+        if(isWalking && isRunning)
+        {
+            anim.Play("Run");
+        }
+        else if (isWalking)
+        {
+            anim.Play("Walk");
+        }
+        else
+        {
+            anim.Play("Idle");
         }
     }
 

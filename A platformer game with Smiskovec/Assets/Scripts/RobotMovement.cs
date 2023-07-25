@@ -16,7 +16,6 @@ public class RobotMovement : MonoBehaviour
     public bool isSliding = false;
     public bool isDashing = false;
     public bool isRunning = false; // Flag to track if the robot is running
-    public bool isWalking = false; // Flag to track if the robot is walking
 
     // Movement speed
     private float moveSpeed;
@@ -66,24 +65,16 @@ public class RobotMovement : MonoBehaviour
         // Flip the sprite based on movement direction
         if (movement.x < 0) // If moving left
         {
-            transform.localScale = new Vector3(-4.314114f, 4.314114f, 1); // Flip the sprite to face left 
-            isWalking = true;
+            transform.localScale = new Vector3(-4.314114f, 4.314114f, 1); // Flip the sprite to face left
         }
         else if (movement.x > 0) // If moving right
         {
             transform.localScale = new Vector3(4.314114f, 4.314114f, 1); // Reset the sprite to face right
-            isWalking = true;
-        }
-        else
-        {
-            isWalking = false;
         }
 
         // Set animator parameters
         anim.SetFloat("Speed", moveSpeed);
         anim.SetBool("IsGrounded", isGrounded);
-        anim.SetBool("IsRunning", isRunning);
-        anim.SetBool("Walking", isWalking);
 
         // Jump
         if (isGrounded && Input.GetButtonDown("Jump"))
@@ -94,7 +85,7 @@ public class RobotMovement : MonoBehaviour
         // Slide
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-           // Slide();
+            Slide();
         }
 
         // Run (Hold Left Shift to run)
